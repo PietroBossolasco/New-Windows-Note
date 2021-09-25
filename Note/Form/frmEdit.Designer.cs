@@ -36,13 +36,13 @@ namespace Note
             this.tsSalva = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSalvaConNome = new System.Windows.Forms.ToolStripMenuItem();
             this.tsApriFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsNewFile = new System.Windows.Forms.ToolStripMenuItem();
             this.impostazioniDiSicurezzaDelFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.esciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferenzeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.impostazioniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vaiAlSitoWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsNewFile = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +61,6 @@ namespace Note
             this.rtbText.Text = "";
             this.rtbText.ZoomFactor = 1.3F;
             this.rtbText.TextChanged += new System.EventHandler(this.rtbText_TextChanged);
-            this.rtbText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rtbText_KeyDown);
             // 
             // menuStrip1
             // 
@@ -93,7 +92,7 @@ namespace Note
             this.tsSalva,
             this.tsSalvaConNome});
             this.salvaToolStripMenuItem.Name = "salvaToolStripMenuItem";
-            this.salvaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salvaToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.salvaToolStripMenuItem.Text = "Salva";
             // 
             // tsSalva
@@ -113,20 +112,27 @@ namespace Note
             // tsApriFile
             // 
             this.tsApriFile.Name = "tsApriFile";
-            this.tsApriFile.Size = new System.Drawing.Size(180, 22);
+            this.tsApriFile.Size = new System.Drawing.Size(160, 22);
             this.tsApriFile.Text = "Apri file";
             this.tsApriFile.Click += new System.EventHandler(this.tsApriFile_Click);
+            // 
+            // tsNewFile
+            // 
+            this.tsNewFile.Name = "tsNewFile";
+            this.tsNewFile.Size = new System.Drawing.Size(160, 22);
+            this.tsNewFile.Text = "Nuovo file";
+            this.tsNewFile.Click += new System.EventHandler(this.tsNewFile_Click);
             // 
             // impostazioniDiSicurezzaDelFileToolStripMenuItem
             // 
             this.impostazioniDiSicurezzaDelFileToolStripMenuItem.Name = "impostazioniDiSicurezzaDelFileToolStripMenuItem";
-            this.impostazioniDiSicurezzaDelFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.impostazioniDiSicurezzaDelFileToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.impostazioniDiSicurezzaDelFileToolStripMenuItem.Text = "Sicurezza del file";
             // 
             // esciToolStripMenuItem
             // 
             this.esciToolStripMenuItem.Name = "esciToolStripMenuItem";
-            this.esciToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.esciToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.esciToolStripMenuItem.Text = "Esci";
             // 
             // preferenzeToolStripMenuItem
@@ -157,13 +163,6 @@ namespace Note
             this.vaiAlSitoWebToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.vaiAlSitoWebToolStripMenuItem.Text = "Vai al sito web";
             // 
-            // tsNewFile
-            // 
-            this.tsNewFile.Name = "tsNewFile";
-            this.tsNewFile.Size = new System.Drawing.Size(180, 22);
-            this.tsNewFile.Text = "Nuovo file";
-            this.tsNewFile.Click += new System.EventHandler(this.tsNewFile_Click);
-            // 
             // frmEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,6 +173,7 @@ namespace Note
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmEdit";
             this.Text = "Modifica file";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEdit_FormClosing);
             this.Load += new System.EventHandler(this.frmEdit_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmEdit_KeyDown);
             this.menuStrip1.ResumeLayout(false);

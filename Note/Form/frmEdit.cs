@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 using clstxt;
 using ManageDoc;
 
@@ -74,19 +75,31 @@ namespace Note
             }
         }
 
-        private void rtbText_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (Control.ModifierKeys == Keys.Control && Control.ModifierKeys == Keys.S)
-            {
-                Console.WriteLine("Saved");
-            }
-        }
-
         private void tsNewFile_Click(object sender, EventArgs e)
         {
+            //Apre la finestra per la configurazione di un nuovo file;
             frmNewFile fnf = new frmNewFile();
-
             fnf.Show();
+        }
+
+        private void frmEdit_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Richide all'utente se è sicuro di chiudere il file senza salvare
+            //TODO: Avviare questo processo solo quando il file non è già stato salvato
+            var save = MessageBox.Show("Vuoi salvare prima di chiudere il progetto?", "Salva", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+            if (save == DialogResult.Yes)
+            {
+                MessageBox.Show("True");
+                Application.Exit();
+            }
+            else if (save == DialogResult.No)
+            {
+                MessageBox.Show("False");
+                Application.Exit();
+            }
+            else if (save == DialogResult.Cancel)
+                e.Cancel = true;
         }
     }
 }
