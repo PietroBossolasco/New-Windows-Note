@@ -51,12 +51,14 @@ namespace Note
                 picShowHide.Image = Properties.Resources.expand_arrow;
                 advancedOpen = true;
                 pnlAdvance.Visible = true;
+                flp.Height = pnlGeneral.Height;
             }
             else if (advancedOpen)
             {
                 picShowHide.Image = Properties.Resources.unexpand_arrow;
                 advancedOpen = false;
                 pnlAdvance.Visible = false;
+                flp.Height = pnlGeneral.Height + pnlAdvance.Height;
             }
         }
     }

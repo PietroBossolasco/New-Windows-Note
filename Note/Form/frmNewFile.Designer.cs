@@ -38,23 +38,25 @@ namespace Note
             this.lblPerc = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlCont = new System.Windows.Forms.Panel();
             this.picShowHide = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pnlAdvance = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1.SuspendLayout();
+            this.flp = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlGeneral = new System.Windows.Forms.Panel();
+            this.pnlCont.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picShowHide)).BeginInit();
             this.pnlAdvance.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.flp.SuspendLayout();
+            this.pnlGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Tai Le", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(134, 5);
+            this.lblTitle.Location = new System.Drawing.Point(144, 5);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(140, 19);
             this.lblTitle.TabIndex = 0;
@@ -63,7 +65,7 @@ namespace Note
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 55);
+            this.label1.Location = new System.Drawing.Point(3, 61);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 1;
@@ -72,7 +74,7 @@ namespace Note
             // txtFileName
             // 
             this.txtFileName.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtFileName.Location = new System.Drawing.Point(113, 52);
+            this.txtFileName.Location = new System.Drawing.Point(103, 58);
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.Size = new System.Drawing.Size(243, 20);
             this.txtFileName.TabIndex = 2;
@@ -81,7 +83,7 @@ namespace Note
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(362, 55);
+            this.label2.Location = new System.Drawing.Point(352, 61);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 13);
             this.label2.TabIndex = 3;
@@ -89,7 +91,7 @@ namespace Note
             // 
             // btnCambPerc
             // 
-            this.btnCambPerc.Location = new System.Drawing.Point(113, 106);
+            this.btnCambPerc.Location = new System.Drawing.Point(103, 107);
             this.btnCambPerc.Name = "btnCambPerc";
             this.btnCambPerc.Size = new System.Drawing.Size(243, 23);
             this.btnCambPerc.TabIndex = 4;
@@ -100,7 +102,7 @@ namespace Note
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 86);
+            this.label3.Location = new System.Drawing.Point(42, 84);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 5;
@@ -109,7 +111,7 @@ namespace Note
             // lblPerc
             // 
             this.lblPerc.AutoSize = true;
-            this.lblPerc.Location = new System.Drawing.Point(113, 86);
+            this.lblPerc.Location = new System.Drawing.Point(103, 84);
             this.lblPerc.Name = "lblPerc";
             this.lblPerc.Size = new System.Drawing.Size(22, 17);
             this.lblPerc.TabIndex = 6;
@@ -119,7 +121,7 @@ namespace Note
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(119, 214);
+            this.button1.Location = new System.Drawing.Point(119, 166);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(178, 23);
             this.button1.TabIndex = 7;
@@ -136,31 +138,22 @@ namespace Note
             this.label4.TabIndex = 8;
             this.label4.Text = "Sicurezza";
             // 
-            // panel1
+            // pnlCont
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlCont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel1.Controls.Add(this.picShowHide);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.pnlAdvance);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.lblTitle);
-            this.panel1.Controls.Add(this.txtFileName);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.btnCambPerc);
-            this.panel1.Controls.Add(this.lblPerc);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.MinimumSize = new System.Drawing.Size(400, 275);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(400, 275);
-            this.panel1.TabIndex = 9;
+            this.pnlCont.Controls.Add(this.pnlGeneral);
+            this.pnlCont.Controls.Add(this.pnlAdvance);
+            this.pnlCont.Location = new System.Drawing.Point(3, 3);
+            this.pnlCont.MinimumSize = new System.Drawing.Size(400, 275);
+            this.pnlCont.Name = "pnlCont";
+            this.pnlCont.Size = new System.Drawing.Size(400, 275);
+            this.pnlCont.TabIndex = 9;
             // 
             // picShowHide
             // 
             this.picShowHide.Image = global::Note.Properties.Resources.unexpand_arrow;
-            this.picShowHide.Location = new System.Drawing.Point(138, 135);
+            this.picShowHide.Location = new System.Drawing.Point(134, 136);
             this.picShowHide.Name = "picShowHide";
             this.picShowHide.Size = new System.Drawing.Size(21, 20);
             this.picShowHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -172,7 +165,7 @@ namespace Note
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(165, 139);
+            this.label6.Location = new System.Drawing.Point(161, 139);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 16);
             this.label6.TabIndex = 11;
@@ -192,39 +185,57 @@ namespace Note
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(165, 33);
+            this.label5.Location = new System.Drawing.Point(166, 39);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 16);
             this.label5.TabIndex = 9;
             this.label5.Text = "Generali";
             // 
-            // flowLayoutPanel1
+            // flp
             // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Controls.Add(this.panel1);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 1);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(423, 194);
-            this.flowLayoutPanel1.TabIndex = 10;
+            this.flp.AutoScroll = true;
+            this.flp.Controls.Add(this.pnlCont);
+            this.flp.Location = new System.Drawing.Point(3, 1);
+            this.flp.Name = "flp";
+            this.flp.Size = new System.Drawing.Size(423, 164);
+            this.flp.TabIndex = 10;
+            // 
+            // pnlGeneral
+            // 
+            this.pnlGeneral.Controls.Add(this.lblTitle);
+            this.pnlGeneral.Controls.Add(this.label6);
+            this.pnlGeneral.Controls.Add(this.picShowHide);
+            this.pnlGeneral.Controls.Add(this.label5);
+            this.pnlGeneral.Controls.Add(this.label1);
+            this.pnlGeneral.Controls.Add(this.txtFileName);
+            this.pnlGeneral.Controls.Add(this.btnCambPerc);
+            this.pnlGeneral.Controls.Add(this.label2);
+            this.pnlGeneral.Controls.Add(this.lblPerc);
+            this.pnlGeneral.Controls.Add(this.label3);
+            this.pnlGeneral.Location = new System.Drawing.Point(7, 0);
+            this.pnlGeneral.Name = "pnlGeneral";
+            this.pnlGeneral.Size = new System.Drawing.Size(376, 159);
+            this.pnlGeneral.TabIndex = 13;
             // 
             // frmNewFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 249);
+            this.ClientSize = new System.Drawing.Size(427, 201);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.MaximumSize = new System.Drawing.Size(443, 288);
-            this.MinimumSize = new System.Drawing.Size(443, 288);
+            this.Controls.Add(this.flp);
+            this.MaximumSize = new System.Drawing.Size(443, 240);
+            this.MinimumSize = new System.Drawing.Size(443, 240);
             this.Name = "frmNewFile";
             this.Text = "Nouvo documento";
             this.Load += new System.EventHandler(this.frmNewFile_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlCont.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picShowHide)).EndInit();
             this.pnlAdvance.ResumeLayout(false);
             this.pnlAdvance.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flp.ResumeLayout(false);
+            this.pnlGeneral.ResumeLayout(false);
+            this.pnlGeneral.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -240,11 +251,12 @@ namespace Note
         private System.Windows.Forms.Label lblPerc;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlCont;
         private System.Windows.Forms.Panel pnlAdvance;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flp;
         private System.Windows.Forms.PictureBox picShowHide;
+        private System.Windows.Forms.Panel pnlGeneral;
     }
 }

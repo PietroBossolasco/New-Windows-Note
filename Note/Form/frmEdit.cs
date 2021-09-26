@@ -90,12 +90,10 @@ namespace Note
 
             if (save == DialogResult.Yes)
             {
-                MessageBox.Show("True");
                 Application.Exit();
             }
             else if (save == DialogResult.No)
             {
-                MessageBox.Show("False");
                 Application.Exit();
             }
             else if (save == DialogResult.Cancel)
