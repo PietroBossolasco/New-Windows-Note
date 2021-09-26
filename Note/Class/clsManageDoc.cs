@@ -32,7 +32,7 @@ namespace ManageDoc
                 file.Close();
             }catch(Exception ex)
             {
-                Interaction.MsgBox(ex.ToString(), MsgBoxStyle.Critical, "Errore");
+                Interaction.MsgBox("Impossibile creare il file", MsgBoxStyle.Critical, "Errore");
             }
         }
 

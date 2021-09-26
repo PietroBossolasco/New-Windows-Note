@@ -15,10 +15,15 @@ namespace Note
 {
     public partial class frmEdit : Form
     {
+        //Indica il path del file su cui si stà lavorando
         private string path;
+        //Indica se il file è stato salvato
         private bool saved;
+        //Salva il testo allo stato dell'ultimo salvataggio
         private string txt;
+        //Salva il nome del file
         private string fileName;
+        //Indica se il file è appena stato creato
         public bool isNew;
 
         public frmEdit()
