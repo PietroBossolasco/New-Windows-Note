@@ -25,6 +25,8 @@ namespace Note
         private string fileName;
         //Indica se il file è appena stato creato
         public bool isNew;
+        //Serve per risolvere un bug riguardante la chiusura del form
+        bool? requireClose;
 
         public frmEdit()
         {
@@ -33,17 +35,18 @@ namespace Note
 
         private void frmEdit_Load(object sender, EventArgs e)
         {
+            fileName = "test.txt";
             path = "C:\\Users\\imink\\Desktop\\file.txt";
             saved = true;
             txt = rtbText.Text;
+            requireClose = null;
+            this.Text = fileName;
         }
 
         private void tsSalva_Click(object sender, EventArgs e)
         {
             if (!clsManageDoc.existFile(path))
-            {
                 clsManageDoc.createFile(path);
-            }
 
             clsTxt.saveText(rtbText, path);
             saved = true;
@@ -55,12 +58,21 @@ namespace Note
             if (rtbText.Text != txt)
             {
                 saved = false;
+                this.Text = fileName + " - Non salvato";
+            }
+            else
+            {
+                saved = true;
+                this.Text = fileName;
             }
         }
 
         private void tsSalvaConNome_Click(object sender, EventArgs e)
         {
             path = clsManageDoc.chooseFile();
+            clsTxt.saveText(rtbText, path);
+            txt = rtbText.Text;
+            saved = true;
         }
 
         private void tsApriFile_Click(object sender, EventArgs e)
@@ -89,20 +101,28 @@ namespace Note
 
         private void frmEdit_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //Richide all'utente se è sicuro di chiudere il file senza salvare
-            //TODO: Avviare questo processo solo quando il file non è già stato salvato
-            var save = MessageBox.Show("Vuoi salvare prima di chiudere il progetto?", "Salva", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (!requireClose.HasValue)
+            {
+                //Richide all'utente se è sicuro di chiudere il file senza salvare
+                //TODO: Avviare questo processo solo quando il file non è già stato salvato
+                var save = MessageBox.Show("Vuoi salvare prima di chiudere il progetto?", "Salva", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
-            if (save == DialogResult.Yes)
-            {
-                Application.Exit();
+                if (save == DialogResult.Yes)
+                {
+                    requireClose = true;
+                    Application.Exit();
+                }
+                else if (save == DialogResult.No)
+                {
+                    requireClose = true;
+                    Application.Exit();
+                }
+                else if (save == DialogResult.Cancel)
+                {
+                    requireClose = true;
+                    e.Cancel = true;
+                }
             }
-            else if (save == DialogResult.No)
-            {
-                Application.Exit();
-            }
-            else if (save == DialogResult.Cancel)
-                e.Cancel = true;
         }
     }
 }
