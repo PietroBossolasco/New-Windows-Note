@@ -86,10 +86,7 @@ namespace Note
 
         private void frmEdit_KeyDown(object sender, KeyEventArgs e)
         {
-            if(Control.ModifierKeys == Keys.Control)
-            {
-                Console.WriteLine("a");
-            }
+
         }
 
         private void tsNewFile_Click(object sender, EventArgs e)
