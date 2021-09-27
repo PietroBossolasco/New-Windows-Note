@@ -23,13 +23,12 @@ namespace Note
             clsSetting.inizializeSettings();
         }
 
-        private void btnNewFile_Click(object sender, EventArgs e)
+        private void pnlNewDoc_Click(object sender, EventArgs e)
         {
-            frmEdit ed = new frmEdit();
-            ed.Activate();
-            ed.Show();
+            frmNewFile fnf = new frmNewFile();  
+            fnf.Activate();
+            fnf.Show();
             this.Visible = false;
         }
-
     }
 }

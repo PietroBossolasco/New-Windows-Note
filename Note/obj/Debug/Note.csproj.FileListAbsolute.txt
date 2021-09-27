@@ -10,3 +10,4 @@ Z:\Coding\C#\Form\Note\Note\obj\Debug\Note.csproj.CoreCompileInputs.cache
 Z:\Coding\C#\Form\Note\Note\obj\Debug\Note.exe
 Z:\Coding\C#\Form\Note\Note\obj\Debug\Note.pdb
 Z:\Coding\C#\Form\Note\Note\obj\Debug\Note.frmNewFile.resources
+Z:\Coding\C#\Form\Note\Note\obj\Debug\Note.csproj.SuggestedBindingRedirects.cache

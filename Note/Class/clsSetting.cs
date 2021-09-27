@@ -7,12 +7,18 @@ namespace Settings
 {
     class clsSetting
     {
+        //Struct che contiene tutte le impostazioni di note
         public struct settings
         {
+            //Indica la versione corrente di note
             public string version;
+            //Indica il path dove salvare i file di default
             public string defaultPath;
+            //Indica il font della RichTextBox
             public string font;
+            //Indica la dimensione del font della RichTextBox
             public int fontSize;
+            //Indica la versione corrente dell'installer
             public string installerVersion;
         }
 
@@ -47,6 +53,8 @@ namespace Settings
 
                         if (v[0] == "Version")
                             sett.version = v[1];
+                        else if (v[0] == "defaultPath")
+                            sett.defaultPath = v[1];
                     }
 
                     Console.WriteLine(sett.version);

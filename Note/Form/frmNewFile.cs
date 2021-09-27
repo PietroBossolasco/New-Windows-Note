@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ManageDoc;
+using Microsoft.VisualBasic;
 
 namespace Note
 {
@@ -28,6 +29,11 @@ namespace Note
         {
             advancedOpen = false;
             pnlAdvance.Visible = false;
+
+            picShowHide.Image = Properties.Resources.unexpand_arrow;
+            advancedOpen = false;
+            pnlAdvance.Visible = false;
+            flp.Height = pnlGeneral.Height + pnlAdvance.Height;
         }
 
         private void btnCambPerc_Click(object sender, EventArgs e)
@@ -59,6 +65,16 @@ namespace Note
                 advancedOpen = false;
                 pnlAdvance.Visible = false;
                 flp.Height = pnlGeneral.Height + pnlAdvance.Height;
+            }
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            if (clsManageDoc.existFile(path))
+                Interaction.MsgBox("Esiste già un file chiamato così", MsgBoxStyle.Critical, "Errore");
+            else
+            {
+                clsManageDoc.createFile(path);
             }
         }
     }

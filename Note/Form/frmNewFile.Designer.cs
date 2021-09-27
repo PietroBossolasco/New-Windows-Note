@@ -36,20 +36,20 @@ namespace Note
             this.btnCambPerc = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.lblPerc = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.pnlCont = new System.Windows.Forms.Panel();
-            this.picShowHide = new System.Windows.Forms.PictureBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pnlAdvance = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.flp = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlGeneral = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.picShowHide = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pnlAdvance = new System.Windows.Forms.Panel();
+            this.flp = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlCont.SuspendLayout();
+            this.pnlGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picShowHide)).BeginInit();
             this.pnlAdvance.SuspendLayout();
             this.flp.SuspendLayout();
-            this.pnlGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -118,15 +118,16 @@ namespace Note
             this.lblPerc.Text = "C:\\\\";
             this.lblPerc.UseCompatibleTextRendering = true;
             // 
-            // button1
+            // btnCreate
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(119, 166);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(178, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Crea file";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCreate.Location = new System.Drawing.Point(119, 166);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(178, 23);
+            this.btnCreate.TabIndex = 7;
+            this.btnCreate.Text = "Crea file";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // label4
             // 
@@ -150,56 +151,6 @@ namespace Note
             this.pnlCont.Size = new System.Drawing.Size(400, 275);
             this.pnlCont.TabIndex = 9;
             // 
-            // picShowHide
-            // 
-            this.picShowHide.Image = global::Note.Properties.Resources.unexpand_arrow;
-            this.picShowHide.Location = new System.Drawing.Point(134, 136);
-            this.picShowHide.Name = "picShowHide";
-            this.picShowHide.Size = new System.Drawing.Size(21, 20);
-            this.picShowHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picShowHide.TabIndex = 12;
-            this.picShowHide.TabStop = false;
-            this.picShowHide.Click += new System.EventHandler(this.picShowHide_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(161, 139);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 16);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Avanzate";
-            // 
-            // pnlAdvance
-            // 
-            this.pnlAdvance.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.pnlAdvance.Controls.Add(this.label4);
-            this.pnlAdvance.Location = new System.Drawing.Point(11, 158);
-            this.pnlAdvance.Name = "pnlAdvance";
-            this.pnlAdvance.Size = new System.Drawing.Size(372, 200);
-            this.pnlAdvance.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(166, 39);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 16);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Generali";
-            // 
-            // flp
-            // 
-            this.flp.AutoScroll = true;
-            this.flp.Controls.Add(this.pnlCont);
-            this.flp.Location = new System.Drawing.Point(3, 1);
-            this.flp.Name = "flp";
-            this.flp.Size = new System.Drawing.Size(423, 164);
-            this.flp.TabIndex = 10;
-            // 
             // pnlGeneral
             // 
             this.pnlGeneral.Controls.Add(this.lblTitle);
@@ -217,12 +168,65 @@ namespace Note
             this.pnlGeneral.Size = new System.Drawing.Size(376, 159);
             this.pnlGeneral.TabIndex = 13;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label6.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(159, 137);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(63, 16);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Avanzate";
+            this.label6.Click += new System.EventHandler(this.picShowHide_Click);
+            // 
+            // picShowHide
+            // 
+            this.picShowHide.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picShowHide.Image = global::Note.Properties.Resources.unexpand_arrow;
+            this.picShowHide.Location = new System.Drawing.Point(137, 134);
+            this.picShowHide.Name = "picShowHide";
+            this.picShowHide.Size = new System.Drawing.Size(21, 20);
+            this.picShowHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picShowHide.TabIndex = 12;
+            this.picShowHide.TabStop = false;
+            this.picShowHide.Click += new System.EventHandler(this.picShowHide_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(166, 39);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(58, 16);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Generali";
+            // 
+            // pnlAdvance
+            // 
+            this.pnlAdvance.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlAdvance.Controls.Add(this.label4);
+            this.pnlAdvance.Location = new System.Drawing.Point(11, 158);
+            this.pnlAdvance.Name = "pnlAdvance";
+            this.pnlAdvance.Size = new System.Drawing.Size(372, 200);
+            this.pnlAdvance.TabIndex = 10;
+            // 
+            // flp
+            // 
+            this.flp.AutoScroll = true;
+            this.flp.Controls.Add(this.pnlCont);
+            this.flp.Location = new System.Drawing.Point(3, 1);
+            this.flp.Name = "flp";
+            this.flp.Size = new System.Drawing.Size(423, 164);
+            this.flp.TabIndex = 10;
+            // 
             // frmNewFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(427, 201);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.flp);
             this.MaximumSize = new System.Drawing.Size(443, 240);
             this.MinimumSize = new System.Drawing.Size(443, 240);
@@ -230,12 +234,12 @@ namespace Note
             this.Text = "Nouvo documento";
             this.Load += new System.EventHandler(this.frmNewFile_Load);
             this.pnlCont.ResumeLayout(false);
+            this.pnlGeneral.ResumeLayout(false);
+            this.pnlGeneral.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picShowHide)).EndInit();
             this.pnlAdvance.ResumeLayout(false);
             this.pnlAdvance.PerformLayout();
             this.flp.ResumeLayout(false);
-            this.pnlGeneral.ResumeLayout(false);
-            this.pnlGeneral.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -249,7 +253,7 @@ namespace Note
         private System.Windows.Forms.Button btnCambPerc;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblPerc;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel pnlCont;
         private System.Windows.Forms.Panel pnlAdvance;
