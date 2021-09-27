@@ -15,7 +15,6 @@ namespace clstxt
             StreamWriter sw = new StreamWriter(path);
 
             sw.WriteLine(rtb.Text);
-
             sw.Close();
         }
 

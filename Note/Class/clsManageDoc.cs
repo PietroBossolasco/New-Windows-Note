@@ -74,5 +74,15 @@ namespace ManageDoc
 
             return path;
         }
+
+        public static string takeFileName(string path)
+        {
+            string fileName = string.Empty;
+            string[]v = path.Split('/');
+
+            fileName = v[v.Length - 1];
+
+            return fileName;
+        }
     }
 }

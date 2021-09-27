@@ -28,6 +28,8 @@ namespace Note
         //Serve per risolvere un bug riguardante la chiusura del form
         bool? requireClose;
 
+        string[] text = new string[0];
+
         public frmEdit()
         {
             InitializeComponent();
@@ -35,12 +37,25 @@ namespace Note
 
         private void frmEdit_Load(object sender, EventArgs e)
         {
+            frmHome fh = new frmHome();
+
+            if (!string.IsNullOrEmpty(fh.path) && fh.path != "")
+                path = fh.path;
+
+            Console.WriteLine(fh.path);
+            Console.WriteLine(path);
+
+            //clsManageDoc.takeFileName(path);
+
             fileName = "test.txt";
-            path = "C:\\Users\\imink\\Desktop\\file.txt";
             saved = true;
-            txt = rtbText.Text;
             requireClose = null;
             this.Text = fileName;
+
+            if (!string.IsNullOrEmpty(path))
+                clsTxt.printRtb(rtbText, text);
+
+            txt = rtbText.Text;
         }
 
         private void tsSalva_Click(object sender, EventArgs e)
@@ -77,7 +92,6 @@ namespace Note
 
         private void tsApriFile_Click(object sender, EventArgs e)
         {
-            string[] text = new string[0];
 
             path = clsManageDoc.chooseFile();
             clsTxt.readFile(path, ref text);
@@ -107,6 +121,7 @@ namespace Note
                 if (save == DialogResult.Yes)
                 {
                     requireClose = true;
+                    clsTxt.saveText(rtbText, path);
                     Application.Exit();
                 }
                 else if (save == DialogResult.No)
