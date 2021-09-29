@@ -1,2 +1,0 @@
-Version|0.9.1
-Default_path|C:\Users\imink\Desktop
