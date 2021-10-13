@@ -10,52 +10,59 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
-    
+
     public partial class FormMain : Form
     {
-        
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
 
-
-        static extern bool HideCaret(IntPtr hWnd);
-
-        RichTextBox resultbox;
+        RichTextBox resultBox;
         int resultBoxTextSize = 24;
 
-        struct ButtonStruct
+        private const char ASCIIZERO = '\0';
+        private double operand1, operand2, result;
+        private char lastOperator = ASCIIZERO;
+        private ButtonStruct lastButtonClicked;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern bool HideCaret(IntPtr hWnd);
+
+
+        public struct ButtonStruct
         {
             public char Content;
             public bool IsBold;
             public bool IsNumber;
-            public bool IsdecimalSeparator;
+            public bool IsDecimalSeparator;
             public bool IsPlusMinusSign;
-            
-            public ButtonStruct(char content, bool IsBold, bool IsNumber=false, bool decimalseparator=false, bool sign=false)//costruttore della struct. IsNumber=false è un default
+            public bool IsOperator;
+            public bool IsEqualSign;
+            public ButtonStruct(char content, bool isBold, 
+                bool isNumber = false, bool isDecimalSeparator = false,
+                bool isPlusMinusSign = false, bool isOperator = false, bool isEqualSign = false)
             {
                 this.Content = content;
-                this.IsBold = IsBold;
-                this.IsNumber = IsNumber;
-                this.IsdecimalSeparator = decimalseparator;
-                this.IsPlusMinusSign = sign;
-                
-
+                this.IsBold = isBold;
+                this.IsNumber = isNumber;
+                this.IsDecimalSeparator = isDecimalSeparator;
+                this.IsPlusMinusSign = isPlusMinusSign;
+                this.IsOperator = isOperator;
+                this.IsEqualSign = isEqualSign;
             }
             public override string ToString()
             {
-                //permette di andare a ridefinire il comportamento di tostring() sulla struct in Content
                 return Content.ToString();
             }
         }
 
         private ButtonStruct[,] buttons =
         {
-            { new ButtonStruct('%', false),  new ButtonStruct('Œ', false),  new ButtonStruct('C', false),  new ButtonStruct('', false) },
-            { new ButtonStruct('⅟', false),  new ButtonStruct('²', false),  new ButtonStruct('⎷', false),  new ButtonStruct('÷', false) },
-            { new ButtonStruct('7', true, true),  new ButtonStruct('8', true, true),  new ButtonStruct('9', true, true),  new ButtonStruct('×', false) },
-            { new ButtonStruct('4', true, true),  new ButtonStruct('5', true, true),  new ButtonStruct('6', true, true),  new ButtonStruct('-', false) },
-            { new ButtonStruct('1', true, true),  new ButtonStruct('2', true, true),  new ButtonStruct('3', true, true),  new ButtonStruct('+', false) },
-            { new ButtonStruct('±', false, false, false, true),  new ButtonStruct('0', true, true),  new ButtonStruct(',', false, false, true),  new ButtonStruct('=', false) }
+            { new ButtonStruct('%', false), new ButtonStruct('Œ', false), new ButtonStruct('C', false), new ButtonStruct('⌫', false) },
+            { new ButtonStruct('⅟', false), new ButtonStruct('²', false), new ButtonStruct('⎷', false), new ButtonStruct('÷', false, false, false, false, true) },
+            { new ButtonStruct('7', true, true), new ButtonStruct('8', true, true), new ButtonStruct('9', true, true), new ButtonStruct('×', false, false, false, false, true) },
+            { new ButtonStruct('4', true, true), new ButtonStruct('5', true, true), new ButtonStruct('6', true, true), new ButtonStruct('-', false, false, false, false, true) },
+            { new ButtonStruct('1', true, true), new ButtonStruct('2', true, true), new ButtonStruct('3', true, true), new ButtonStruct('+', false, false, false, false, true) },
+            { new ButtonStruct('±', false, false, false, true), new ButtonStruct('0', true, true), new ButtonStruct(',', false, false, true), new ButtonStruct('=', false, false, false, false, false, true) }
         };
+
         public FormMain()
         {
             InitializeComponent();
@@ -63,78 +70,74 @@ namespace Calculator
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            
             MakeResultBox();
             MakeButtons(buttons);
         }
 
         private void MakeResultBox()
         {
-            
-            resultbox = new RichTextBox();
-            resultbox.ReadOnly = true;
-            resultbox.SelectionAlignment = HorizontalAlignment.Right;//allineamento a destra
-            resultbox.Font = new Font("Segoe UI", resultBoxTextSize, FontStyle.Regular);
-            resultbox.Width = this.Width - 16; //this.width=largheza della form
-            resultbox.Height = 120;
-            resultbox.Text = "0";
-            resultbox.ReadOnly = true;
-            resultbox.TabStop = false;
-            resultbox.GotFocus += Resultbox_HideCaretHandler;
-            resultbox.MouseDown += Resultbox_HideCaretHandler;
-            resultbox.SelectionChanged += Resultbox_HideCaretHandler;
-            resultbox.TextChanged += Resultbox_TextChanged;
-        
-
-            this.Controls.Add(resultbox);
-            
-
+            resultBox = new RichTextBox();
+            resultBox.ReadOnly = true;
+            resultBox.SelectionAlignment = HorizontalAlignment.Right;
+            resultBox.Font = new Font("Segoe UI", resultBoxTextSize, FontStyle.Regular);
+            resultBox.Width = this.Width - 16;
+            resultBox.Height = 120;
+            resultBox.Text = "0";
+            resultBox.TabStop = false;
+            resultBox.GotFocus += ResultBox_HideCaretHandler;
+            resultBox.MouseDown += ResultBox_HideCaretHandler;
+            resultBox.SelectionChanged += ResultBox_HideCaretHandler;
+            resultBox.TextChanged += ResultBox_TextChanged;
+            this.Controls.Add(resultBox);
         }
 
-        private void Resultbox_TextChanged(object sender, EventArgs e)
+        private void ResultBox_TextChanged(object sender, EventArgs e)
         {
-            HideCaret(resultbox.Handle);
-            int newSize = resultBoxTextSize - resultbox.Text.Length + 12;
-            if (newSize > 8 && newSize < resultBoxTextSize+1) 
+            HideCaret(resultBox.Handle);
+            int newSize = resultBoxTextSize - resultBox.Text.Length + 12;
+            if (newSize > 8 && newSize < resultBoxTextSize + 1)
             {
-                resultbox.Font = new Font("Segoe UI", newSize, FontStyle.Regular);
+                resultBox.Font = new Font("Segoe UI", newSize, FontStyle.Regular);
             }
-
-            if (resultbox.Text.Length >= 6)
-                resultbox.Text += ".";
-            
+            else if (newSize > 8)
+            {
+                resultBox.Font = new Font("Segoe UI", resultBoxTextSize, FontStyle.Regular);
+            }
         }
 
-        private void Resultbox_HideCaretHandler(object sender, EventArgs e)
+        private string getFormattedNumber(double number)
         {
-            HideCaret(resultbox.Handle);
-
+            string stOut = number.ToString("N");
+            return stOut;
         }
 
+        private void ResultBox_HideCaretHandler(object sender, EventArgs e)
+        {
+            HideCaret(resultBox.Handle);
+        }
 
         private void MakeButtons(ButtonStruct[,] buttons)
         {
-            int buttonWidth = 82, buttonHeight = 60;
+            int buttonWidth = 80;
+            int buttonHeight = 60;
             int posX = 0;
             int posY = 110;
-            //creazione dinamica dei bottoni
             for (int i = 0; i < buttons.GetLength(0); i++)
             {
                 for (int j = 0; j < buttons.GetLength(1); j++)
                 {
-                    ButtonStruct myButtonStruct = buttons[i, j];//struttura
-                    Button myButton = new Button();//bottone
-                    FontStyle mybuttonstyle = myButtonStruct.IsBold ? FontStyle.Bold : FontStyle.Regular;//versione più compatta dell' if else
-                    
-                    myButton.Font = new Font("Segoe UI", 16, mybuttonstyle);
-                    myButton.Text = buttons[i, j].ToString(); //override di ToString il programma legge Content.ToString();
+                    ButtonStruct myButtonStruct = buttons[i, j];
+                    Button myButton = new Button();
+                    FontStyle myButtonStyle = myButtonStruct.IsBold ? FontStyle.Bold : FontStyle.Regular;
+                    myButton.Font = new Font("Segoe UI", 16, myButtonStyle);
+                    myButton.Text = myButtonStruct.ToString();
                     myButton.Width = buttonWidth;
                     myButton.Height = buttonHeight;
-                    this.Controls.Add(myButton);
                     myButton.Left = posX;
                     myButton.Top = posY;
-                    myButton.Tag = myButtonStruct;//tag è un object, quindi si può mettere quello che si vuole. Tag permette di dare un attributo
+                    myButton.Tag = myButtonStruct;
                     myButton.Click += Button_Click;
+                    this.Controls.Add(myButton);
                     posX += buttonWidth;
                 }
                 posX = 0;
@@ -142,59 +145,108 @@ namespace Calculator
             }
         }
 
-        private void Button_Click(object sender, EventArgs e)//sender: colui che ci ha mandato qui una volta attivato l'evento
+        private void Button_Click(object sender, EventArgs e)
         {
-            Button clickedbutton = (Button)sender;
-            ButtonStruct clickedbuttonstruct = (ButtonStruct)clickedbutton.Tag;
-
-            if (clickedbuttonstruct.IsNumber)
+            Button clickedButton = (Button)sender;
+            ButtonStruct clickedButtonStructure = (ButtonStruct)clickedButton.Tag;
+            if (clickedButtonStructure.IsNumber)
             {
-                if (resultbox.Text == "0")
-                    resultbox.Text = "";
-                resultbox.Text += clickedbutton.Text;
-                
+                if (lastButtonClicked.IsEqualSign)
+                {
+                    clearAll();
+                }
+                if (resultBox.Text == "0" || lastButtonClicked.IsOperator )
+                {
+                    resultBox.Text = "";
+                }
+                resultBox.Text += clickedButton.Text;
             }
             else
             {
-                if (clickedbuttonstruct.IsdecimalSeparator)
+                if (clickedButtonStructure.IsDecimalSeparator)
                 {
-                    if (!(resultbox.Text.Contains(clickedbuttonstruct.Content)))
-                        resultbox.Text += clickedbutton.Text;
+                    if (!resultBox.Text.Contains(clickedButtonStructure.Content))
+                    {
+                        resultBox.Text += clickedButton.Text;
+                    }
                 }
-                
-                if (clickedbuttonstruct.IsPlusMinusSign && resultbox.Text!="0")
-                    resultbox.Text = resultbox.Text.StartsWith("-") ? resultbox.Text.Replace("-", "") : "-" + resultbox.Text;
+                if (clickedButtonStructure.IsPlusMinusSign && resultBox.Text != "0")
+                {
+                    resultBox.Text = resultBox.Text.Contains("-") ? resultBox.Text.Replace("-", "") : "-" + resultBox.Text;
+                }
                 else
                 {
-                    switch (clickedbuttonstruct.Content)
+                    switch (clickedButtonStructure.Content)
                     {
                         case 'C':
-                            resultbox.Text = "0";
+                            clearAll();
                             break;
-                        case '':
-                            resultbox.Text = resultbox.Text.Remove(resultbox.Text.Length - 1);
-                            if (resultbox.Text.Length == 0 || resultbox.Text=="-" || resultbox.Text=="-0")
-                                resultbox.Text = "0";
-                            
+                        case '⌫':
+                            resultBox.Text = resultBox.Text.Remove(resultBox.Text.Length - 1);
+                            if (resultBox.Text.Length == 0 || resultBox.Text == "-" || resultBox.Text == "-0")
+                            {
+                                resultBox.Text = "0";
+                            }
+                            break;
+                        default:
+                            manageOperators(clickedButtonStructure);
                             break;
                     }
                 }
-                    
-                       
-                
-                
             }
-            
+            lastButtonClicked = clickedButtonStructure;
+        }
 
+        private void clearAll()
+        {
+            operand1 = 0;
+            operand2 = 0;
+            result = 0;
+            lastOperator = ASCIIZERO;
+            resultBox.Text = "0";
+        }
 
-
+        private void manageOperators(ButtonStruct clickedButtonStructure)
+        {
+            if (lastOperator == ASCIIZERO)
+            {
+                operand1 = double.Parse(resultBox.Text);
+                if (!clickedButtonStructure.IsEqualSign) lastOperator = clickedButtonStructure.Content;
+            }
+            else
+            {
+                if (!lastButtonClicked.IsEqualSign) operand2 = double.Parse(resultBox.Text);
+                if (lastButtonClicked.IsEqualSign && clickedButtonStructure.IsOperator) lastOperator = ASCIIZERO;
+                switch (lastOperator)
+                {
+                    case '+':
+                        result = operand1 + operand2;
+                        break;
+                    case '-':
+                        result = operand1 - operand2;
+                        break;
+                    case '×':
+                        result = operand1 * operand2;
+                        break;
+                    case '÷':
+                        result = operand1 / operand2;
+                        break;
+                    default:
+                        break;
+                }
+                operand1 = result;
+                if (!clickedButtonStructure.IsEqualSign)
+                {
+                    lastOperator = clickedButtonStructure.Content;
+                    operand2 = 0;
+                }
+                resultBox.Text = result.ToString();
+            }
         }
 
         private void FormMain_Activated(object sender, EventArgs e)
         {
-            resultbox.TabStop = true;
+            resultBox.TabStop = true;
         }
-
-        
     }
 }

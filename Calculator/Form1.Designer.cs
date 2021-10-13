@@ -34,9 +34,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 470);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MinimizeBox = false;
+            this.ClientSize = new System.Drawing.Size(320, 470);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "Calcolatrice";
             this.Activated += new System.EventHandler(this.FormMain_Activated);
